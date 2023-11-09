@@ -1,31 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from "@nestjs/typeorm";
-import { UserEntity } from "../entities";
-import { Repository } from "typeorm";
-import { SignUpDTO } from "../dto/signUp.dto";
-import { EmailIsTakenError } from "../error-handlers/email-is-taken.error";
-import { encrypt, matchPassword } from "../helpers/password.helper";
-import { LoginDTO } from "../dto/login.dto";
-import { UserNotFoundError } from "../error-handlers/user-not-found.error";
-import { PasswordDoesntMatchError } from "../error-handlers/password-doesnt-match.error";
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserEntity } from '../entities';
+import { Repository } from 'typeorm';
+import { SignUpDTO } from '../dto/signUp.dto';
+import { EmailIsTakenError } from '../error-handlers/email-is-taken.error';
+import { encrypt, matchPassword } from '../helpers/password.helper';
+import { LoginDTO } from '../dto/login.dto';
+import { UserNotFoundError } from '../error-handlers/user-not-found.error';
+import { PasswordDoesntMatchError } from '../error-handlers/password-doesnt-match.error';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+  ) {}
 
   public async createUser(signUpDTO: SignUpDTO): Promise<UserEntity> {
-    const existingUser = this._findByAttr("email", signUpDTO.email);
+    const existingUser = this._findByAttr('email', signUpDTO.email);
 
     if (existingUser) {
       throw new EmailIsTakenError();
     } else {
-      const user = this.userRepository.create()
-      user.email = signUpDTO.email
-      user.username = signUpDTO.username
-      user.password = await encrypt(signUpDTO.password)
+      const user = this.userRepository.create();
+      user.email = signUpDTO.email;
+      user.username = signUpDTO.username;
+      user.password = await encrypt(signUpDTO.password);
 
-      await this.userRepository.save(user)
-      return user
+      await this.userRepository.save(user);
+      return user;
     }
   }
 

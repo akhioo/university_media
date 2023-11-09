@@ -1,4 +1,4 @@
-import { IsString } from "class-validator";
+import { IsString } from 'class-validator';
 
 export class SignUpDTO {
   @IsString()
@@ -8,5 +8,5 @@ export class SignUpDTO {
   readonly username: string;
 
   @IsString()
-  readonly password: string
+  readonly password: string;
 }

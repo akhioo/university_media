@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
-import { UserEntity } from "./entities";
+import { UserEntity } from "../entities";
 import { Repository } from "typeorm";
-import { SignUpDTO } from "./dto/signUp.dto";
-import { EmailIsTakenError } from "./error-handlers/email-is-taken.error";
-import { encrypt, matchPassword } from "./helpers/password.helper";
-import { LoginDTO } from "./dto/login.dto";
-import { UserNotFoundError } from "./error-handlers/user-not-found.error";
-import { PasswordDoesntMatchError } from "./error-handlers/password-doesnt-match.error";
+import { SignUpDTO } from "../dto/signUp.dto";
+import { EmailIsTakenError } from "../error-handlers/email-is-taken.error";
+import { encrypt, matchPassword } from "../helpers/password.helper";
+import { LoginDTO } from "../dto/login.dto";
+import { UserNotFoundError } from "../error-handlers/user-not-found.error";
+import { PasswordDoesntMatchError } from "../error-handlers/password-doesnt-match.error";
 
 @Injectable()
 export class UsersService {

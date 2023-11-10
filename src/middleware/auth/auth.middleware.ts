@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
-import { BadJWTError, NoJWTError } from "./error-handlers";
+import { BadJWTError, NoJWTError } from './error-handlers';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {

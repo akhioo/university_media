@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from '../entities';
+import { UserEntity } from './entities';
 import { Repository } from 'typeorm';
-import { SignUpDTO } from '../dto/signUp.dto';
-import { EmailIsTakenError } from '../error-handlers/email-is-taken.error';
-import { encrypt, matchPassword } from '../helpers/password.helper';
-import { LoginDTO } from '../dto/login.dto';
-import { UserNotFoundError } from '../error-handlers/user-not-found.error';
-import { PasswordDoesntMatchError } from '../error-handlers/password-doesnt-match.error';
+import { EmailIsTakenError } from './error-handlers';
+import { encrypt, matchPassword } from './helpers';
+import { UserNotFoundError } from './error-handlers';
+import { PasswordDoesntMatchError } from './error-handlers';
+import { LoginDTO, SignupDto } from '../auth';
 
 @Injectable()
 export class UsersService {
@@ -16,7 +15,7 @@ export class UsersService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  public async createUser(signUpDTO: SignUpDTO): Promise<UserEntity> {
+  public async createUser(signUpDTO: SignupDto): Promise<UserEntity> {
     const existingUser = this._findByAttr('email', signUpDTO.email);
 
     if (existingUser) {

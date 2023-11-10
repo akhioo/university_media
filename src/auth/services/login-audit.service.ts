@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { LoginRecordEntity } from '../entities/LoginRecord.entity';
+import { LoginRecordEntity } from '../entities/login-record.entity';
 import { Repository } from 'typeorm';
 import moment from 'moment';
 

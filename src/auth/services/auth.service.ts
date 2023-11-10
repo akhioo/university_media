@@ -1,13 +1,12 @@
-import { UsersService } from './users.service';
-import { SignUpDTO } from '../dto/signUp.dto';
-import { AuthenticatedUserInterface } from '../interfaces/authenticated-user.interface';
 import * as owasp from 'owasp-password-strength-test';
-import { PasswordIsWeakError } from '../error-handlers/password-is-weak.error';
 import { sign } from 'jsonwebtoken';
 import * as process from 'process';
-import { LoginDTO } from '../dto/login.dto';
-import { UserEntity } from '../entities';
 import { LoginAuditService } from './login-audit.service';
+import { LoginDTO, SignupDto } from '../dto';
+import { AuthenticatedUserInterface } from '../interfaces';
+import { PasswordIsWeakError } from '../error-handlers';
+import { UserEntity } from '../../users';
+import { UsersService } from '../../users/users.service';
 
 export class AuthService {
   constructor(
@@ -16,7 +15,7 @@ export class AuthService {
   ) {}
 
   public async signUp(
-    signUpDTO: SignUpDTO,
+    signUpDTO: SignupDto,
   ): Promise<AuthenticatedUserInterface> {
     await this.verifyPasswordStrength(signUpDTO.password);
 

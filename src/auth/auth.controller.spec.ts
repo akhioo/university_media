@@ -1,14 +1,14 @@
-import { AuthController } from './auth.controller';
-import { AuthService } from './services';
-import { Test, TestingModule } from '@nestjs/testing';
-import { SignupDto } from './dto';
-import { UsersService } from '../users/users.service';
-import { UsersModule } from '../users/users.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from '../users';
-import { LoginRecordEntity } from './entities';
+import { AuthController } from "./auth.controller";
+import { AuthService } from "./services";
+import { Test, TestingModule } from "@nestjs/testing";
+import { SignupDto } from "./dto";
+import { UsersService } from "../users/users.service";
+import { UsersModule } from "../users/users.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { UserEntity } from "../users";
+import { LoginRecordEntity } from "./entities";
 
-describe('AuthController', () => {
+describe("AuthController", () => {
   let authController: AuthController;
   let authService: AuthService;
 
@@ -19,12 +19,12 @@ describe('AuthController', () => {
       imports: [
         UsersModule,
         TypeOrmModule.forRoot({
-          type: 'postgres',
-          host: 'localhost',
+          type: "postgres",
+          host: "localhost",
           port: 5432,
-          username: 'akhio',
-          password: 'hasonkay05',
-          database: 'university_media',
+          username: "akhio",
+          password: "hasonkay05",
+          database: "university_media",
           entities: [UserEntity, LoginRecordEntity],
           synchronize: true,
         }),
@@ -36,15 +36,15 @@ describe('AuthController', () => {
     authService = module.get<AuthService>(AuthService);
   });
 
-  describe('onUserSignUp', () => {
-    it('should call authService.signUp with the provided data', async () => {
+  describe("onUserSignUp", () => {
+    it("should call authService.signUp with the provided data", async () => {
       const signUpDTO: SignupDto = {
-        email: 'jack@gmail.com',
-        username: 'JackDen',
-        password: 'JackDenison.1982',
+        email: "jack@gmail.com",
+        username: "JackDen",
+        password: "JackDenison.1982",
       };
 
-      jest.spyOn(authService, 'signUp');
+      jest.spyOn(authService, "signUp");
 
       const result = await authController.onUserSignUp(signUpDTO);
 

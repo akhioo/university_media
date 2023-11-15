@@ -1,7 +1,7 @@
-import { Injectable, NestMiddleware } from '@nestjs/common';
-import { Request, Response, NextFunction } from 'express';
-import { verify } from 'jsonwebtoken';
-import { BadJWTError, NoJWTError } from './error-handlers';
+import { Injectable, NestMiddleware } from "@nestjs/common";
+import { Request, Response, NextFunction } from "express";
+import { verify } from "jsonwebtoken";
+import { BadJWTError, NoJWTError } from "./error-handlers";
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
@@ -9,7 +9,7 @@ export class AuthMiddleware implements NestMiddleware {
     const authHeader = req.headers.authorization;
 
     if (authHeader) {
-      const bearerIndex = authHeader.indexOf('Bearer');
+      const bearerIndex = authHeader.indexOf("Bearer");
       const token = authHeader.substring(bearerIndex + 7);
 
       try {

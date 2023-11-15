@@ -1,4 +1,4 @@
-import { compare, genSalt, hash } from 'bcrypt';
+import { compare, genSalt, hash } from "bcrypt";
 
 const SALT_ROUNDS = 10;
 
@@ -9,7 +9,7 @@ export const encrypt = async (plainPasswordText: string) => {
 
 export const matchPassword = async (
   hashedPassword: string,
-  plainTextPassword: string,
+  plainTextPassword: string
 ) => {
   return await compare(hashedPassword, plainTextPassword);
 };

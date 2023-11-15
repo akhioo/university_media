@@ -1,1 +1,1 @@
-export * from './password-is-weak.error';
+export * from "./password-is-weak.error";

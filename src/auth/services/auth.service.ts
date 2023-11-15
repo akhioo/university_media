@@ -1,21 +1,21 @@
-import * as owasp from 'owasp-password-strength-test';
-import { sign } from 'jsonwebtoken';
-import * as process from 'process';
-import { LoginAuditService } from './login-audit.service';
-import { LoginDTO, SignupDto } from '../dto';
-import { AuthenticatedUserInterface } from '../interfaces';
-import { PasswordIsWeakError } from '../error-handlers';
-import { UserEntity } from '../../users';
-import { UsersService } from '../../users/users.service';
+import * as owasp from "owasp-password-strength-test";
+import { sign } from "jsonwebtoken";
+import * as process from "process";
+import { LoginAuditService } from "./login-audit.service";
+import { LoginDTO, SignupDto } from "../dto";
+import { AuthenticatedUserInterface } from "../interfaces";
+import { PasswordIsWeakError } from "../error-handlers";
+import { UserEntity } from "../../users";
+import { UsersService } from "../../users/users.service";
 
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
-    private readonly loginAuditService: LoginAuditService,
+    private readonly loginAuditService: LoginAuditService
   ) {}
 
   public async signUp(
-    signUpDTO: SignupDto,
+    signUpDTO: SignupDto
   ): Promise<AuthenticatedUserInterface> {
     await this.verifyPasswordStrength(signUpDTO.password);
 
@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   private async _proceedWithLogin(
-    user: UserEntity,
+    user: UserEntity
   ): Promise<AuthenticatedUserInterface> {
     await this.loginAuditService.recordLogin(user.id);
 

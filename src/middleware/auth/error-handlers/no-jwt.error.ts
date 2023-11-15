@@ -1,7 +1,7 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus } from "@nestjs/common";
 
 export class NoJWTError extends HttpException {
   constructor() {
-    super('Access token was not found', HttpStatus.FORBIDDEN);
+    super("Access token was not found", HttpStatus.FORBIDDEN);
   }
 }

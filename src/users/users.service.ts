@@ -1,22 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from './entities';
-import { Repository } from 'typeorm';
-import { EmailIsTakenError } from './error-handlers';
-import { encrypt, matchPassword } from './helpers';
-import { UserNotFoundError } from './error-handlers';
-import { PasswordDoesntMatchError } from './error-handlers';
-import { LoginDTO, SignupDto } from '../auth';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { UserEntity } from "./entities";
+import { Repository } from "typeorm";
+import { EmailIsTakenError } from "./error-handlers";
+import { encrypt, matchPassword } from "./helpers";
+import { UserNotFoundError } from "./error-handlers";
+import { PasswordDoesntMatchError } from "./error-handlers";
+import { LoginDTO, SignupDto } from "../auth";
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
+    private readonly userRepository: Repository<UserEntity>
   ) {}
 
   public async createUser(signUpDTO: SignupDto): Promise<UserEntity> {
-    const existingUser = this._findByAttr('email', signUpDTO.email);
+    const existingUser = this._findByAttr("email", signUpDTO.email);
 
     if (existingUser) {
       throw new EmailIsTakenError();
@@ -32,7 +32,7 @@ export class UsersService {
   }
 
   public async findByEmailAndPassword(loginDTO: LoginDTO): Promise<UserEntity> {
-    const user = await this._findByAttr('email', loginDTO.email);
+    const user = await this._findByAttr("email", loginDTO.email);
 
     if (!user) {
       throw new UserNotFoundError();
